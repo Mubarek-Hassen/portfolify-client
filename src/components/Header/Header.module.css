@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: sienna;
+  padding: 0 5%;
+}
+
+.ul > * {
+  display: inline;
+  padding: 10px;
+}
