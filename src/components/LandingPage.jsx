@@ -1,16 +1,22 @@
-import { Fragment } from "react";
-import Footer from "./Footer/Footer";
+import { useState } from "react";
+import Form from "./Form/Form";
 import Header from "./Header/Header";
 
 
 const LandingPage = (props) =>{
+  const [startForm, setStartForm] = useState(false)
+
+  const formStartHandler =()=>{
+    setStartForm(!startForm)
+  }
 
   return (
     <div>
       <Header />
       <h1>Welcome to Portfolify</h1>
       <h3>Create your portfolio website for free.</h3>
-      <Footer />
+      <button onClick={formStartHandler}>Start Here</button>
+      {startForm && <Form/>}
     </div>
   )
 }
