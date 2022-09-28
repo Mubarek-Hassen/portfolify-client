@@ -1,0 +1,13 @@
+.footer {
+  background-color: black;
+  color: cornsilk;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+
+}
+.ul {
+  list-style: none;
+
+}
