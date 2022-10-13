@@ -15,7 +15,7 @@ const LandingPage = (props) =>{
       <Header />
       <h1>Welcome to Portfolify</h1>
       <h3>Create your portfolio website for free.</h3>
-      <button onClick={formStartHandler}>Start Here</button>
+      <button onClick={formStartHandler}>{!startForm ? 'Start Here' : 'Close'}</button>
       {startForm && <Form/>}
     </div>
   )
