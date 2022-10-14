@@ -25,7 +25,13 @@ function App() {
         return (
           <div key={portfolio._id}>
           <h1 >{portfolio.full_name}</h1>
-          <img src={ portfolio.image }/>
+          {/* <img src={ portfolio.image }/> */}
+          <ul>
+            {portfolio.skills.map(item=>{
+              return <li key={item._id}>{item.skill}</li>
+            })}
+          </ul>
+          
           </div>
         )
       })}
