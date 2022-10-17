@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {  useReducer } from 'react';
 import classes from './Form.module.css'
 const reducer =(state, action)=>{
@@ -7,17 +8,20 @@ const reducer =(state, action)=>{
         ...state,
         [action.field]: action.payload,
       }
+      case "ADD SKILL":
+        state.skills.push(action.payload)
       default: 
         return state
   }
 }
 
 const Form =(props)=>{
+  const [skill, setSkill] = useState('')
   const initialState = {
     full_name: "",
     profession: "",
     image: "",
-    skills: [{skill: "" }],
+    skills: [],
     projects: [{
       title: "",
       image: "",
@@ -26,6 +30,7 @@ const Form =(props)=>{
     }]
   }
   const [state, dispatch] = useReducer(reducer, initialState)
+
   
   const handleInputChange = (e)=>{
     dispatch({
@@ -36,26 +41,41 @@ const Form =(props)=>{
     console.log(e.target.name)
     console.log(e.target.value)
   }
-  console.log(state.full_name)
+  console.log(state)
   return (
     <form >
+
       <div className={classes.card}>
-
       <label>Full Name </label>
-
       <input value={state.full_name} onChange={ handleInputChange } type="text" name='full_name'/>
-
-
       </div>
-      {/* <div className={classes.card}>
+      <div className={classes.card}>
       <label>Profession </label>
-      <input onChange={ handleInputChange } type="text" name='profession'/>
+      <input value={state.profession} onChange={ handleInputChange } type="text" name='profession'/>
       </div>
       <div className={classes.card}>
       <label>Image </label>
-      <input  type="text" value={state.image} name='image'/>
+      <input value={state.image} onChange={ handleInputChange } type="text"  name='image'/>
       </div>
-      <br /> */}
+      <div className={classes.card}>
+      <label>Skills </label>
+      <input type="text" name={state.skills} value={skill} onChange={(e)=>{
+        setSkill(e.target.value)
+      }}/>
+      <button onClick={(e)=>{
+        e.preventDefault();
+        dispatch({type: 'ADD SKILL', field: e.target.name, payload: skill})
+        setSkill("")
+      }}> Add skill</button>
+      </div>
+      <div className={classes.card}>
+      <label>Projects </label>
+      </div>
+      <div className={classes.card}>
+      <label>Image </label>
+      <input value={state.projects.title} onChange={ handleInputChange } type="text"  name={state.projects[0].title}/>
+      </div>
+      <br />
       <button>Submit</button>
     </form>
   )

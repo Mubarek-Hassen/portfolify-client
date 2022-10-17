@@ -9,7 +9,6 @@ function App() {
       const data = await fetch('http://localhost:4000/portfolios');
       const res = await data.json()
       console.log(res)
-      console.log(data)
       setPortfolios(res)
     } catch (error) {
       console.log(error)
@@ -27,8 +26,8 @@ function App() {
           <h1 >{portfolio.full_name}</h1>
           {/* <img src={ portfolio.image }/> */}
           <ul>
-            {portfolio.skills.map(item=>{
-              return <li key={item._id}>{item.skill}</li>
+            {portfolio.skills.map((item,id)=>{
+              return <li key={id}>{item}</li>
             })}
           </ul>
           
