@@ -11,7 +11,7 @@ const reducer =(state, action)=>{
     case "ADD SKILL":
         state.skills.push(action.payload);
     case "ADD PROJECT":
-          // state.projects.push(action.payload)
+          state.projects.push(action.payload)
     default:
       return state
   }
@@ -48,6 +48,16 @@ const Form =(props)=>{
     console.log(e.target.name)
     console.log(e.target.value)
   }
+  const addProject=(e)=>{
+    e.preventDefault()
+    dispatch({type: "ADD PROJECT", payload: project})
+    setProject({
+      title: "",
+      image: "",
+      description: "",
+      link: ""
+    })
+  }
   console.log(state)
   
   return (
@@ -74,7 +84,7 @@ const Form =(props)=>{
       }}/>
       <button onClick={(e)=>{
         e.preventDefault();
-        dispatch({type: 'ADD SKILL', field: e.target.name, payload: skill})
+        dispatch({type: 'ADD SKILL', field: state.skills, payload: skill})
         setSkill("")
       }}> Add skill</button>
       </div>
@@ -90,7 +100,7 @@ const Form =(props)=>{
       <br />
       <input type="text" placeholder='Project Link' value={project.link} onChange={(e)=>{setProject((prev)=>({...prev, link: e.target.value}))}}/>
       <br />
-      <button >Add Project</button>
+      <button onClick={addProject}>Add Project</button>
       </div>
       <br />
       <button >Submit</button>
