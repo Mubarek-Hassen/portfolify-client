@@ -42,6 +42,14 @@ const Form =(props)=>{
     link: ""
   })
   console.log(project)
+
+  const showProject = state.projects.map((item, id)=>{
+    return(<div key={id}>
+      <img src={item.image} alt={item.title} />
+      <br />
+      <a href={item.link}> {item.title}</a>
+    </div>)
+  })
   
   const handleInputChange =(e)=>{
     e.preventDefault()
@@ -110,6 +118,7 @@ const Form =(props)=>{
       <br />
       <button onClick={addProject}>Add Project</button>
       </div>
+      { showProject }
       <br />
       <button >Submit</button>
     </form>
