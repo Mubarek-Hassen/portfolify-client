@@ -7,11 +7,15 @@ const reducer =(state, action)=>{
       return {
         ...state,
         [action.field]: action.payload
-      }
+      };
     case "ADD SKILL":
-        state.skills.push(action.payload);
+      return {
+        ...state, ...state.skills.push(action.payload)
+      }
     case "ADD PROJECT":
-          state.projects.push(action.payload)
+        return {
+          ...state, ...state.projects.push(action.payload)
+        }
     default:
       return state
   }
@@ -29,7 +33,7 @@ const Form =(props)=>{
 
   const [state, dispatch] = useReducer(reducer, initialState)
   
-  const [skill, setSkill] = useState('')
+  const [skill, setSkill] = useState("")
   
   const [project, setProject] = useState({
     title: "",
@@ -40,6 +44,7 @@ const Form =(props)=>{
   console.log(project)
   
   const handleInputChange =(e)=>{
+    e.preventDefault()
     dispatch({
       type: "HANDLE INPUT TEXT",
       field: e.target.name,
@@ -57,6 +62,11 @@ const Form =(props)=>{
       description: "",
       link: ""
     })
+  }
+  const addSkill=(e)=>{
+    e.preventDefault();
+    dispatch({type: 'ADD SKILL', payload: skill})
+    setSkill("")
   }
   console.log(state)
   
@@ -79,14 +89,10 @@ const Form =(props)=>{
       
       <div className={classes.card}>
       <label>Skills </label>
-      <input type="text" name={state.skills} value={skill} onChange={(e)=>{
+      <input type="text"  value={skill} onChange={(e)=>{
         setSkill(e.target.value)
       }}/>
-      <button onClick={(e)=>{
-        e.preventDefault();
-        dispatch({type: 'ADD SKILL', field: state.skills, payload: skill})
-        setSkill("")
-      }}> Add skill</button>
+      <button onClick={addSkill}> Add skill</button>
       </div>
       
       <div className={classes.card}>
