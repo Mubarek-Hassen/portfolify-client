@@ -6,10 +6,14 @@ const reducer =(state, action)=>{
     case "HANDLE INPUT TEXT":
       return {
         ...state,
-        [action.field]: action.payload,
+        [action.field]: action.payload
+        
       }
       case "ADD SKILL":
         state.skills.push(action.payload)
+        break
+        case "ADD PROJECT":
+          // state.projects.push(action.payload),
       default: 
         return state
   }
@@ -69,11 +73,17 @@ const Form =(props)=>{
       }}> Add skill</button>
       </div>
       <div className={classes.card}>
-      <label>Projects </label>
-      </div>
-      <div className={classes.card}>
-      <label>Image </label>
-      <input value={state.projects.title} onChange={ handleInputChange } type="text"  name={state.projects[0].title}/>
+      <label>Project </label>
+      <br />
+      <input type="text" placeholder='Project Title'/>
+      <br />
+      <input type="text" placeholder='Project Image'/>
+      <br />
+      <textarea type="text" placeholder='Project Description'/>
+      <br />
+      <input type="text" placeholder='Project Link'/>
+      <br />
+      <button>Add Project</button>
       </div>
       <br />
       <button>Submit</button>
