@@ -65,8 +65,10 @@ const Form =(props)=>{
   }
   const addSkill=(e)=>{
     e.preventDefault();
+    if(skill.length > 1){
     dispatch({type: 'ADD SKILL', payload: skill})
     setSkill("")
+    }
   }
   console.log(state)
   
