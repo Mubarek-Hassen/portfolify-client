@@ -7,36 +7,39 @@ const reducer =(state, action)=>{
       return {
         ...state,
         [action.field]: action.payload
-        
       }
-      case "ADD SKILL":
-        state.skills.push(action.payload)
-        break
-        case "ADD PROJECT":
-          // state.projects.push(action.payload),
-      default: 
-        return state
+    case "ADD SKILL":
+        state.skills.push(action.payload);
+    case "ADD PROJECT":
+          // state.projects.push(action.payload)
+    default:
+      return state
   }
 }
 
 const Form =(props)=>{
-  const [skill, setSkill] = useState('')
+  
   const initialState = {
     full_name: "",
     profession: "",
     image: "",
     skills: [],
-    projects: [{
-      title: "",
-      image: "",
-      description: "",
-      link: ""
-    }]
+    projects: []
   }
-  const [state, dispatch] = useReducer(reducer, initialState)
 
+  const [state, dispatch] = useReducer(reducer, initialState)
   
-  const handleInputChange = (e)=>{
+  const [skill, setSkill] = useState('')
+  
+  const [project, setProject] = useState({
+    title: "",
+    image: "",
+    description: "",
+    link: ""
+  })
+  console.log(project)
+  
+  const handleInputChange =(e)=>{
     dispatch({
       type: "HANDLE INPUT TEXT",
       field: e.target.name,
@@ -46,21 +49,24 @@ const Form =(props)=>{
     console.log(e.target.value)
   }
   console.log(state)
+  
   return (
     <form >
-
       <div className={classes.card}>
       <label>Full Name </label>
       <input value={state.full_name} onChange={ handleInputChange } type="text" name='full_name'/>
       </div>
+      
       <div className={classes.card}>
       <label>Profession </label>
       <input value={state.profession} onChange={ handleInputChange } type="text" name='profession'/>
       </div>
+      
       <div className={classes.card}>
       <label>Image </label>
       <input value={state.image} onChange={ handleInputChange } type="text"  name='image'/>
       </div>
+      
       <div className={classes.card}>
       <label>Skills </label>
       <input type="text" name={state.skills} value={skill} onChange={(e)=>{
@@ -72,21 +78,22 @@ const Form =(props)=>{
         setSkill("")
       }}> Add skill</button>
       </div>
+      
       <div className={classes.card}>
       <label>Project </label>
       <br />
-      <input type="text" placeholder='Project Title'/>
+      <input type="text" placeholder='Project Title' onChange={(e)=>{setProject((prev)=>({...prev, title: e.target.value}))}} value={project.title} name='title'/>
       <br />
-      <input type="text" placeholder='Project Image'/>
+      <input type="text" placeholder='Project Image' value={project.image} onChange={(e)=>{setProject((prev)=>({...prev, image: e.target.value}))}} name={project.image}/>
       <br />
-      <textarea type="text" placeholder='Project Description'/>
+      <textarea type="text" placeholder='Project Description' value={project.description} onChange={(e)=>{setProject((prev)=>({...prev, description: e.target.value}))}}/>
       <br />
-      <input type="text" placeholder='Project Link'/>
+      <input type="text" placeholder='Project Link' value={project.link} onChange={(e)=>{setProject((prev)=>({...prev, link: e.target.value}))}}/>
       <br />
-      <button>Add Project</button>
+      <button >Add Project</button>
       </div>
       <br />
-      <button>Submit</button>
+      <button >Submit</button>
     </form>
   )
 }
